@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
-import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-login',

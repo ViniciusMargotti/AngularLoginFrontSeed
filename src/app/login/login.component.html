@@ -1,6 +1,6 @@
 <mat-card class="card-login">
   <form (ngSubmit)="checkLogin()" class="example-form">
-    <mat-icon color="primary" aria-hidden="false" aria-label="Example home icon">person</mat-icon>
+    <img layout-align="center center" src="../../assets/img/logoteste.png">
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input [(ngModel)]="username" matInput [formControl]="emailInput"
@@ -25,8 +25,8 @@
     </mat-form-field>
     <br><br>
     <div style="text-align: right">
-      <button type="submit" class="button-login" mat-raised-button color="primary">Entrar</button>
-      <button class="button-login" mat-raised-button color="primary">Cadastrar-se</button>
+      <button class="button-login" [routerLink]="'/register'" mat-raised-button color="primary">Não possui um login? Cadastrar-se</button>
+      <button type="submit" class="button-login" mat-raised-button color="primary"> Entrar</button>
     </div>
   </form>
 </mat-card>
