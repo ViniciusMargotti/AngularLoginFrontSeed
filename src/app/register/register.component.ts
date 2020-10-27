@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../service/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../service/authentication.service';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import {BairroService} from '../service/bairro.service';
+import {CidadeService} from '../service/cidade.service';
+import {EstadoService} from '../service/estado.service';
 
 @Component({
   selector: 'app-register',
@@ -17,15 +15,43 @@ interface Food {
 export class RegisterComponent implements OnInit {
 
   constructor(private router: Router,
-              private loginservice: AuthenticationService) { }
-  get emailInput() { return this.signin.get('email'); }
-  get passwordInput() { return this.signin.get('password'); }
-  get nomeInput() { return this.signin.get('nome'); }
-  get sobrenomeInput() { return this.signin.get('sobrenome'); }
-  get numeroInput() { return this.signin.get('numero'); }
-  get enderecoInput() { return this.signin.get('endereco'); }
-  get complementoInput() { return this.signin.get('complemento'); }
-  get referenciaInput() { return this.signin.get('referencia'); }
+              private loginservice: AuthenticationService,
+              private cidadeservice: CidadeService,
+              private estadoservice: EstadoService,
+              private bairroservice: BairroService) {
+  }
+
+  get emailInput() {
+    return this.signin.get('email');
+  }
+
+  get passwordInput() {
+    return this.signin.get('password');
+  }
+
+  get nomeInput() {
+    return this.signin.get('nome');
+  }
+
+  get sobrenomeInput() {
+    return this.signin.get('sobrenome');
+  }
+
+  get numeroInput() {
+    return this.signin.get('numero');
+  }
+
+  get enderecoInput() {
+    return this.signin.get('endereco');
+  }
+
+  get complementoInput() {
+    return this.signin.get('complemento');
+  }
+
+  get referenciaInput() {
+    return this.signin.get('referencia');
+  }
 
   email = '';
   password = '';
@@ -38,40 +64,58 @@ export class RegisterComponent implements OnInit {
   invalidLogin = false;
 
   signin: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required ]),
-    password: new FormControl('', [Validators.required, Validators.min(3) ]),
-    nome: new FormControl('', [ Validators.required ]),
-    sobrenome: new FormControl('', [Validators.required ]),
-    numero: new FormControl('' , [Validators.required ]),
-    endereco: new FormControl('' , [Validators.required ]),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.min(3)]),
+    nome: new FormControl('', [Validators.required]),
+    sobrenome: new FormControl('', [Validators.required]),
+    numero: new FormControl('', [Validators.required]),
+    endereco: new FormControl('', [Validators.required]),
     complemento: new FormControl(''),
-    referencia: new FormControl('' ),
+    referencia: new FormControl(''),
 
   });
   hide = true;
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  bairros: Bairro[] = this.getBairros();
+  cidades: Cidade[] = this.getCidades();
+  estados: Estado[] = this.getEstados();
 
   ngOnInit() {
   }
 
-  checkLogin() {
-    (this.loginservice.authenticate(this.email, this.password).subscribe(
-        data => {
-          this.loginservice.saveToken(data.token);
-          this.router.navigate(['']);
-          this.invalidLogin = false;
-        },
-        error => {
-          this.invalidLogin = true;
-        }
-      )
+  getBairros() {
+    this.bairroservice.getAll().subscribe(
+      data => {
+        this.bairros = data;
+      },
+      error => {
+        return [];
+      }
     );
+    return null;
+  }
+  getCidades() {
+    this.cidadeservice.getAll().subscribe(
+      data => {
+        this.cidades = data;
+      },
+      error => {
+        return [];
+      }
+    );
+    return null;
+  }
 
+  getEstados() {
+    this.estadoservice.getAll().subscribe(
+      data => {
+        this.estados = data;
+      },
+      error => {
+        return [];
+      }
+    );
+    return null;
   }
 
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

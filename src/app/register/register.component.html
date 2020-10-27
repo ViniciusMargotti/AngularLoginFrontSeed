@@ -38,8 +38,8 @@
     <mat-form-field class="full-width-3" >
       <mat-label>Estado</mat-label>
       <mat-select>
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
+        <mat-option *ngFor="let estado of estados" [value]="estado.id">
+          {{estado.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -47,8 +47,8 @@
     <mat-form-field class="full-width-3" >
       <mat-label>Cidade</mat-label>
       <mat-select>
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
+        <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+          {{cidade.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -56,8 +56,8 @@
     <mat-form-field class="full-width-3" >
       <mat-label>Bairro</mat-label>
       <mat-select>
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
+        <mat-option *ngFor="let bairro of bairros" [value]="bairro.id">
+          {{bairro.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field>
