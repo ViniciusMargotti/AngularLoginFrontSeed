@@ -76,15 +76,16 @@ export class RegisterComponent implements OnInit {
   });
   hide = true;
 
-  bairros: Bairro[] = this.getBairros();
-  cidades: Cidade[] = this.getCidades();
-  estados: Estado[] = this.getEstados();
+  bairros: Bairro[] = [];
+  cidades: Cidade[] = [];
+  estados: Estado[] = [];
 
   ngOnInit() {
+    this.getEstados();
   }
 
-  getBairros() {
-    this.bairroservice.getAll().subscribe(
+  getBairros(cidadeSelecionada) {
+    this.bairroservice.getAll(cidadeSelecionada).subscribe(
       data => {
         this.bairros = data;
       },
@@ -94,8 +95,10 @@ export class RegisterComponent implements OnInit {
     );
     return null;
   }
-  getCidades() {
-    this.cidadeservice.getAll().subscribe(
+  getCidades(estadoSelecionado) {
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    this.cidadeservice.getAll(estadoSelecionado).subscribe(
       data => {
         this.cidades = data;
       },

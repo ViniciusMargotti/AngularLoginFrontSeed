@@ -1,6 +1,6 @@
 <mat-card class="card-login">
   <form (ngSubmit)="checkLogin()" class="example-form">
-    <img layout-align="center center" src="../../assets/img/logoteste.png">
+    <img  width="100px" layout-align="center center" src="../../assets/img/logoteste.png">
 
     <mat-form-field class="example-full-width">
       <mat-label>Informe um Email</mat-label>
@@ -37,7 +37,7 @@
 
     <mat-form-field class="full-width-3" >
       <mat-label>Estado</mat-label>
-      <mat-select>
+      <mat-select  (selectionChange)="this.getCidades($event.value)">
         <mat-option *ngFor="let estado of estados" [value]="estado.id">
           {{estado.nome}}
         </mat-option>
@@ -46,7 +46,7 @@
 
     <mat-form-field class="full-width-3" >
       <mat-label>Cidade</mat-label>
-      <mat-select>
+      <mat-select (selectionChange)="this.getBairros($event.value)">
         <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
           {{cidade.nome}}
         </mat-option>

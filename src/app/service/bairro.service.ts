@@ -12,7 +12,7 @@ export class BairroService {
   ) {
   }
 
-  getAll() {
-    return this.httpClient.get<Bairro[]>('http://localhost:8090/bairros');
+  getAll(cidadeSelecionada) {
+    return this.httpClient.get<Bairro[]>('http://localhost:8090/bairros/' + cidadeSelecionada);
   }
 }

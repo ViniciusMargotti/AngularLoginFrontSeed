@@ -12,7 +12,7 @@ export class CidadeService {
   ) {
   }
 
-  getAll() {
-    return this.httpClient.get<Cidade[]>('http://localhost:8090/cidades');
+  getAll(estadoSelecionado) {
+    return this.httpClient.get<Cidade[]>('http://localhost:8090/cidades/' + estadoSelecionado);
   }
 }
