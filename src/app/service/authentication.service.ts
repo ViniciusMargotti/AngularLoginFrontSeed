@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
 
 export class User {
   constructor(
@@ -29,6 +28,10 @@ export class AuthenticationService {
     const request = {username, password};
 
     return this.httpClient.post<Jtw>('http://localhost:8090/authenticate', request);
+  }
+
+  saveUsuario(usuario) {
+    return this.httpClient.post('http://localhost:8090/usuarios/save', usuario);
   }
 
 

@@ -1,5 +1,5 @@
 <mat-card class="card-login">
-  <form (ngSubmit)="checkLogin()" class="example-form">
+  <form (ngSubmit)="saveUsuario()" class="example-form">
     <img  width="100px" layout-align="center center" src="../../assets/img/logoteste.png">
 
     <mat-form-field class="example-full-width">
@@ -17,7 +17,7 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Nome</mat-label>
-      <input [(ngModel)]="nome" matInput [formControl]="nomeInput"
+      <input [(ngModel)]="nome" maxlength="200" matInput [formControl]="nomeInput"
              placeholder="Ex. Vinícius" required>
       <mat-hint>Informe seu nome</mat-hint>
       <mat-error *ngIf="nomeInput.hasError('required')">
@@ -27,7 +27,7 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Sobrenome</mat-label>
-      <input [(ngModel)]="sobrenome" matInput [formControl]="sobrenomeInput"
+      <input [(ngModel)]="sobrenome" maxlength="200" matInput [formControl]="sobrenomeInput"
              placeholder="Ex. de Souza" required>
       <mat-hint>Informe seu sobrenome</mat-hint>
       <mat-error *ngIf="sobrenomeInput.hasError('required')">
@@ -55,16 +55,16 @@
 
     <mat-form-field class="full-width-3" >
       <mat-label>Bairro</mat-label>
-      <mat-select>
+      <mat-select [formControl]="bairroInput">
         <mat-option *ngFor="let bairro of bairros" [value]="bairro.id">
           {{bairro.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="full-width-2">
       <mat-label>Endereço</mat-label>
-      <input [(ngModel)]="endereco" matInput [formControl]="numeroInput"
+      <input [(ngModel)]="endereco" matInput maxlength="200" [formControl]="numeroInput"
              placeholder="Ex. Rua benjamin gerlach" required>
       <mat-error *ngIf="enderecoInput.hasError('required')">
         O endereço é <strong>obrigatório</strong>
@@ -72,8 +72,17 @@
     </mat-form-field>
 
     <mat-form-field class="full-width-2">
+      <mat-label>CEP</mat-label>
+      <input [(ngModel)]="cep" maxlength="8"  matInput [formControl]="cepInput"
+             placeholder="Ex. 88804-960" required>
+      <mat-error *ngIf="cepInput.hasError('required')">
+        O CEP é <strong>obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-2">
       <mat-label>Número</mat-label>
-      <input [(ngModel)]="numero" matInput [formControl]="numeroInput"
+      <input [(ngModel)]="numero" matInput maxlength="10" [formControl]="numeroInput"
              placeholder="Ex. 151" required>
       <mat-error *ngIf="numeroInput.hasError('required')">
         O número é <strong>obrigatório</strong>
@@ -82,13 +91,13 @@
 
     <mat-form-field class="full-width-2">
       <mat-label>Complemento</mat-label>
-      <input [(ngModel)]="complemento" matInput [formControl]="complementoInput"
+      <input [(ngModel)]="complemento" matInput  maxlength="200"[formControl]="complementoInput"
              placeholder="Ex. apto. casa">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Referência</mat-label>
-      <input [(ngModel)]="referencia" matInput [formControl]="referenciaInput"
+      <input [(ngModel)]="referencia" matInput maxlength="200" [formControl]="referenciaInput"
              placeholder="Ex. próximo a..">
     </mat-form-field>
 
@@ -103,7 +112,7 @@
     </mat-form-field>
     <br><br>
     <div style="text-align: right">
-      <button class="button-login" [routerLink]="'/register'" mat-raised-button color="primary">Cadastrar</button>
+      <button class="button-login" type="submit" mat-raised-button color="primary">Cadastrar</button>
       <button [routerLink]="'/login'" class="button-login" mat-raised-button color="primary">Já possui um login?</button>
     </div>
   </form>

@@ -37,12 +37,20 @@ export class RegisterComponent implements OnInit {
     return this.signin.get('sobrenome');
   }
 
+  get bairroInput() {
+    return this.signin.get('bairro');
+  }
+
   get numeroInput() {
     return this.signin.get('numero');
   }
 
   get enderecoInput() {
     return this.signin.get('endereco');
+  }
+
+  get cepInput() {
+    return this.signin.get('cep');
   }
 
   get complementoInput() {
@@ -57,11 +65,12 @@ export class RegisterComponent implements OnInit {
   password = '';
   nome = '';
   sobrenome = '';
+  bairro = 0;
   complemento = '';
   referencia = '';
   numero = '';
   endereco = '';
-  invalidLogin = false;
+  cep = '';
 
   signin: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -70,6 +79,8 @@ export class RegisterComponent implements OnInit {
     sobrenome: new FormControl('', [Validators.required]),
     numero: new FormControl('', [Validators.required]),
     endereco: new FormControl('', [Validators.required]),
+    cep: new FormControl('', [Validators.required]),
+    bairro: new FormControl('', [Validators.required]),
     complemento: new FormControl(''),
     referencia: new FormControl(''),
 
@@ -113,6 +124,47 @@ export class RegisterComponent implements OnInit {
     this.estadoservice.getAll().subscribe(
       data => {
         this.estados = data;
+      },
+      error => {
+        return [];
+      }
+    );
+    return null;
+  }
+
+  saveUsuario() {
+
+    // tslint:disable-next-line:no-debugger
+    debugger;
+
+    const bairro: Bairro = {
+      id : this.bairroInput.value,
+      nome : '',
+      cidade : null,
+    };
+
+    const pessoa: Pessoa = {
+      cep : this.cep,
+      complemento : this.complemento,
+      endereco: this.endereco,
+      nome: this.nome,
+      numero: this.numero,
+      referencia: this.referencia,
+      sobrenome: this.sobrenome,
+      id : null,
+      bairro
+    };
+
+    const usuario: Usuario = {
+      id : null,
+      email : this.email,
+      senha : this.password,
+      pessoa
+    };
+
+    this.loginservice.saveUsuario(usuario).subscribe(
+      data => {
+        alert('cadsatradod com sucesso!');
       },
       error => {
         return [];
