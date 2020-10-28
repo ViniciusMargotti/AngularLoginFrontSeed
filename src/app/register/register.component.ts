@@ -167,7 +167,9 @@ export class RegisterComponent implements OnInit {
         alert('cadsatradod com sucesso!');
       },
       error => {
-        return [];
+        // tslint:disable-next-line:no-debugger
+        debugger;
+        alert(error.error);
       }
     );
     return null;
