@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material';
+import {ErrorStateMatcher, MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,8 @@ import {ErrorStateMatcher} from '@angular/material';
 export class LoginComponent implements OnInit, ErrorStateMatcher  {
 
   constructor(private router: Router,
-              private loginservice: AuthenticationService) { }
+              private loginservice: AuthenticationService,
+              private snackBar: MatSnackBar) { }
   get emailInput() { return this.signin.get('email'); }
   get passwordInput() { return this.signin.get('password'); }
 
@@ -36,7 +37,12 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
         this.router.navigate(['']);
         this.invalidLogin = false;
       },
-      error => {
+        response => {
+        this.snackBar.open(response.error.message, 'Ok', {
+          duration: 2500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
         this.invalidLogin = true;
       }
     )

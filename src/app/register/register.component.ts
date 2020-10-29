@@ -5,6 +5,7 @@ import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@a
 import {BairroService} from '../service/bairro.service';
 import {CidadeService} from '../service/cidade.service';
 import {EstadoService} from '../service/estado.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
               private loginservice: AuthenticationService,
               private cidadeservice: CidadeService,
               private estadoservice: EstadoService,
-              private bairroservice: BairroService) {
+              private bairroservice: BairroService,
+              private snackBar: MatSnackBar) {
   }
 
   get emailInput() {
@@ -106,9 +108,8 @@ export class RegisterComponent implements OnInit {
     );
     return null;
   }
+
   getCidades(estadoSelecionado) {
-    // tslint:disable-next-line:no-debugger
-    debugger;
     this.cidadeservice.getAll(estadoSelecionado).subscribe(
       data => {
         this.cidades = data;
@@ -125,7 +126,12 @@ export class RegisterComponent implements OnInit {
       data => {
         this.estados = data;
       },
-      error => {
+      response => {
+        this.snackBar.open(response.error.message, 'Ok', {
+          duration: 2500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
         return [];
       }
     );
@@ -134,49 +140,55 @@ export class RegisterComponent implements OnInit {
 
   saveUsuario() {
 
-    // tslint:disable-next-line:no-debugger
-    debugger;
-
     const bairro: Bairro = {
-      id : this.bairroInput.value,
-      nome : '',
-      cidade : null,
+      id: this.bairroInput.value,
+      nome: '',
+      cidade: null,
     };
 
     const pessoa: Pessoa = {
-      cep : this.cep,
-      complemento : this.complemento,
+      cep: this.cep,
+      complemento: this.complemento,
       endereco: this.endereco,
       nome: this.nome,
       numero: this.numero,
       referencia: this.referencia,
       sobrenome: this.sobrenome,
-      id : null,
+      id: null,
       bairro
     };
 
     const usuario: Usuario = {
-      id : null,
-      email : this.email,
-      senha : this.password,
+      id: null,
+      email: this.email,
+      senha: this.password,
       pessoa
     };
 
     this.loginservice.saveUsuario(usuario).subscribe(
       data => {
-        alert('cadsatradod com sucesso!');
+        this.snackBar.open('Usuário cadastrado com sucesso!', 'Ok', {
+          duration: 2500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+        this.router.navigate(['/login']);
       },
-      error => {
-        // tslint:disable-next-line:no-debugger
-        debugger;
-        alert(error.error);
+      response => {
+        if (response.error.errors !== null) {
+          this.snackBar.open(response.error.errors[0].message, 'Ok', {
+            duration: 2500,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
+        } else {
+          this.snackBar.open(response.error.message, 'Ok', {
+            duration: 2500,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
+        }
       }
     );
-    return null;
-  }
-
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }

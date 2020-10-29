@@ -80,7 +80,8 @@ import { RegisterComponent } from './register/register.component';
         MatButtonModule,
         MatButtonModule,
         MatOptionModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule
     ],
   providers: [],
   bootstrap: [AppComponent]
