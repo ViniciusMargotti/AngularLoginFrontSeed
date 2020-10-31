@@ -74,6 +74,8 @@ export class RegisterComponent implements OnInit {
   endereco = '';
   cep = '';
 
+  public cepMask = [/\d/ , /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+
   signin: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required, Validators.max(100)]),
     password: new FormControl('', [Validators.required, Validators.min(3)]),

@@ -73,7 +73,7 @@
 
     <mat-form-field class="full-width-2">
       <mat-label>CEP</mat-label>
-      <input [(ngModel)]="cep" maxlength="8"  matInput [formControl]="cepInput"
+      <input   [textMask]="{mask: cepMask}" [(ngModel)]="cep"  matInput [formControl]="cepInput"
              placeholder="Ex. 88804-960" required>
       <mat-error *ngIf="cepInput.hasError('required')">
         O CEP é <strong>obrigatório</strong>

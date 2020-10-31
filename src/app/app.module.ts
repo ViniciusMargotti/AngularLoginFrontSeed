@@ -53,6 +53,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatButtonModule} from '@angular/material';
 import { RegisterComponent } from './register/register.component';
+import {TextMaskModule} from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -64,27 +65,28 @@ import { RegisterComponent } from './register/register.component';
     LogoutComponent,
     RegisterComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatCardModule,
-        MatButtonModule,
-        MatButtonModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatTabsModule,
-        MatSortModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    MatButtonModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    MatSortModule,
+    TextMaskModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
