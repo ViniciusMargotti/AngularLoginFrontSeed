@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService {
+  private urlBaseApi: string = environment.baseUrl;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  constructor(private httpClient: HttpClient) {
   }
 
   getUsuarios(): Observable<any> {
@@ -18,6 +18,6 @@ export class HttpClientService {
     headers = headers.append('Authorization', 'Bearer ' + user);
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.httpClient.get<Usuario[]>('http://localhost:8090/usuarios/getAll', {headers});
+    return this.httpClient.get<Usuario[]>(this.urlBaseApi + '/usuarios/getAll', {headers});
   }
 }

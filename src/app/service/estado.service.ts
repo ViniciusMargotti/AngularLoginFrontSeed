@@ -1,18 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class EstadoService {
-
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
+  private urlBaseApi: string = environment.baseUrl;
+  constructor( private httpClient: HttpClient ) {}
 
   getAll() {
-    return this.httpClient.get<Estado[]>('http://localhost:8090/estados');
+    return this.httpClient.get<Estado[]>(this.urlBaseApi + '/estados');
   }
 }

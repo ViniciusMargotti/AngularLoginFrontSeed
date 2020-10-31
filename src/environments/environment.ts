@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  baseUrl: 'http://localhost:8080/',
-  baseApiUrl: 'http://localhost:4200/api/'
+  production: true,
+  baseUrl: 'https://loginseed.herokuapp.com',
+  baseApiUrl: 'https://angular-seed-login.herokuapp.com'
 };

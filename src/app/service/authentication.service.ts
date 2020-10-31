@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private urlBaseApi: string = environment.baseUrl;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
+  constructor( private httpClient: HttpClient ) {}
 
   authenticate(username, password) {
 
@@ -19,11 +18,11 @@ export class AuthenticationService {
 
     const request = {username, password};
 
-    return this.httpClient.post<Jtw>('http://localhost:8090/authenticate', request);
+    return this.httpClient.post<Jtw>(this.urlBaseApi + '/authenticate', request);
   }
 
   saveUsuario(usuario) {
-    return this.httpClient.post('http://localhost:8090/usuarios/save', usuario);
+    return this.httpClient.post(this.urlBaseApi + '/usuarios/save', usuario);
   }
 
 
