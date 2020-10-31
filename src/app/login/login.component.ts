@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
   hide = true;
 
   ngOnInit() {
+    const user = sessionStorage.getItem('tokenAuth');
+    if (user !== null) {
+      this.router.navigate(['']);
+    }
   }
 
   checkLogin() {
@@ -36,6 +40,11 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
         this.loginservice.saveToken(data.token);
         this.router.navigate(['']);
         this.invalidLogin = false;
+        this.snackBar.open('Seja Bem vindo!', 'Ok', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
       },
         response => {
         this.snackBar.open(response.error.message, 'Ok', {

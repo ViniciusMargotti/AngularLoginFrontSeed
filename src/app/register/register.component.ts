@@ -75,9 +75,9 @@ export class RegisterComponent implements OnInit {
   cep = '';
 
   signin: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
+    email: new FormControl('', [Validators.email, Validators.required, Validators.max(100)]),
     password: new FormControl('', [Validators.required, Validators.min(3)]),
-    nome: new FormControl('', [Validators.required]),
+    nome: new FormControl('', [Validators.required, Validators.max(100)]),
     sobrenome: new FormControl('', [Validators.required]),
     numero: new FormControl('', [Validators.required]),
     endereco: new FormControl('', [Validators.required]),
@@ -168,7 +168,7 @@ export class RegisterComponent implements OnInit {
     this.loginservice.saveUsuario(usuario).subscribe(
       data => {
         this.snackBar.open('Usuário cadastrado com sucesso!', 'Ok', {
-          duration: 2500,
+          duration: 5000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
         });

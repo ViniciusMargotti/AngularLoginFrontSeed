@@ -1,14 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-export class Employee {
-  constructor(
-    public empId: string,
-    public name: string,
-    public designation: string,
-    public salary: string,
-  ) {}
-}
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,32 +10,14 @@ export class HttpClientService {
   constructor(
     private httpClient: HttpClient
   ) {
-     }
-
-
-
-     getEmployees() {
-    const username = 'javainuse';
-    const password = 'password';
-
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-
-    return this.httpClient.get<Employee[]>('http://localhost:8080/employees', {headers});
   }
 
-  public deleteEmployee(employee) {
-    const username = 'javainuse';
-    const password = 'password';
+  getUsuarios(): Observable<any> {
+    const user = sessionStorage.getItem('tokenAuth');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + user);
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.delete<Employee>('http://localhost:8080/employees' + '/' + employee.empId, {headers});
-  }
-
-  public createEmployee(employee) {
-    const username = 'javainuse';
-    const password = 'password';
-
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.post<Employee>('http://localhost:8080/employees', employee, {headers});
+    return this.httpClient.get<Usuario[]>('http://localhost:8090/usuarios/getAll', {headers});
   }
 }

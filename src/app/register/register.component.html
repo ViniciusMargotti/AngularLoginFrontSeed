@@ -64,7 +64,7 @@
 
     <mat-form-field class="full-width-2">
       <mat-label>Endereço</mat-label>
-      <input [(ngModel)]="endereco" matInput maxlength="200" [formControl]="numeroInput"
+      <input  [(ngModel)]="endereco" matInput maxlength="200" [formControl]="enderecoInput"
              placeholder="Ex. Rua benjamin gerlach" required>
       <mat-error *ngIf="enderecoInput.hasError('required')">
         O endereço é <strong>obrigatório</strong>
@@ -82,7 +82,7 @@
 
     <mat-form-field class="full-width-2">
       <mat-label>Número</mat-label>
-      <input [(ngModel)]="numero" matInput maxlength="10" [formControl]="numeroInput"
+      <input type="number" [(ngModel)]="numero" matInput maxlength="10" [formControl]="numeroInput"
              placeholder="Ex. 151" required>
       <mat-error *ngIf="numeroInput.hasError('required')">
         O número é <strong>obrigatório</strong>

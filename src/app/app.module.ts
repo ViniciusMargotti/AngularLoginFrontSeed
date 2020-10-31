@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './employee/employee.component';
+import { CadastroUsuariosComponent } from './cadastroUsuarios/cadastroUsuarios.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -58,8 +57,7 @@ import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
-    AddEmployeeComponent,
+    CadastroUsuariosComponent,
     HeaderComponent,
     FooterComponent,
     LoginComponent,
@@ -81,7 +79,11 @@ import { RegisterComponent } from './register/register.component';
         MatButtonModule,
         MatOptionModule,
         MatSelectModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatTabsModule,
+        MatSortModule
     ],
   providers: [],
   bootstrap: [AppComponent]
