@@ -22,3 +22,4 @@ Abra o *browser* e acesse a url http://localhost:4200. Pronto!
 ### E agora?
 
 Agora é só abrir seu **editor / IDE** favorito e começar a trabalhar no seu projeto.
+Você pode visualizar a aplicação rodando em  angular-seed-login.herokuapp.com
