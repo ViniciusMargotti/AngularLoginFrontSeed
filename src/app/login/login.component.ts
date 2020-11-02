@@ -40,8 +40,10 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
         this.loginservice.saveToken(data.token);
         this.router.navigate(['']);
         this.invalidLogin = false;
-        this.snackBar.open('Seja Bem vindo!', 'Ok', {
-          duration: 5000,
+        this.snackBar.open('Seja Bem vindo! O servidor deste projeto está hospedado em: ' +
+          'loginseed.herokuapp.com , pode ser que demore alguns minutos após a primeira requisição' +
+          ' para que o servidor seja iniciado.', 'Ok', {
+          duration: 9000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
         });
