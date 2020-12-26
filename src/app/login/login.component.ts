@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
     if (user !== null) {
       this.router.navigate(['']);
     }
+
     this.snackBar.open('Seja Bem vindo! O servidor deste projeto está hospedado em: ' +
       'loginseed.herokuapp.com , pode ser que demore alguns minutos após a primeira requisição' +
       ' para que o servidor seja iniciado.', 'Ok', {
@@ -42,7 +43,13 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
       verticalPosition: 'top',
     });
 
-    this.bairroservice.getAll(1);
+    this.bairroservice.getAll(1).subscribe(
+      data => {
+      },
+      error => {
+        return [];
+      }
+    );
   }
 
   checkLogin() {
