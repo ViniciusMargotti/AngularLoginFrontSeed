@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher, MatSnackBar} from '@angular/material';
+import {BairroService} from "../service/bairro.service";
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
 
   constructor(private router: Router,
               private loginservice: AuthenticationService,
+              private bairroservice: BairroService,
               private snackBar: MatSnackBar) { }
   get emailInput() { return this.signin.get('email'); }
   get passwordInput() { return this.signin.get('password'); }
@@ -39,6 +41,8 @@ export class LoginComponent implements OnInit, ErrorStateMatcher  {
       horizontalPosition: 'right',
       verticalPosition: 'top',
     });
+
+    this.bairroservice.getAll(1);
   }
 
   checkLogin() {
